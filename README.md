@@ -1,8 +1,8 @@
-# AWS: EKS Security Bootcamp </br> Implementing zero-trust security for containers
+# AWS Dev Days: Enforcing workload isolation in multi-tenant EKS cluster
 
 ## Welcome
 
-In this EKS-focused workshop, you will work with AWS and Calico Cloud to learn how implement zero-trust security for workloads to reduce the attack surface of applications running on EKS clusters.  
+In this EKS-focused workshop, you will work with AWS and Calico Cloud to learn how implement implement microsegmentation to achieve workload isolation in multi-tenant design.
 
 Cloud-native applications require a modern approach based on the zero-trust principles of identity-based access, least privilege access, and proactively detecting threats and reducing the blast radius in case of a breach.
 
@@ -24,10 +24,10 @@ The estimated time to complete this workshop is 60-90 minutes.
 
 ### Learning Objectives
 
-1. Learn how to deploy zero-trust workload access controls with namespace isolation recommendations
-2. Extend firewall protection at the granular, workload level
-3. Block lateral movement of APTs with identity-aware microsegmentation
-4. Understand how to apply zero-trust security controls at application level.
+1. Learn how to create and deploy policies based on FQDNs, Layer 7, Networksets.
+2. Stage, preview and enforce network policies.
+3. Leverage recommended policies based on workload traffic to enforce access.
+4. Get started with namespace isolation for default-deny or zero-trust initiatives.
 
 ## Workshop Environment Preparation
 
@@ -66,7 +66,7 @@ The estimated time to complete this workshop is 60-90 minutes.
 This workshop is organized in sequential modules. One module will build up on top of the previous module, so please, follow the order as proposed below.
 
 Module 1 - [Connect the EKS cluster to Calico Cloud](modules/module-1-connect-calicocloud.md)  
-Module 2 - [Zero-Trust Workload Access Control with Namespace Isolation Recommendation](modules/module-2-ztac-ns-isolation.md)  
+Module 2 - [Implement Workload Access Control with Namespace Isolation Recommendation](modules/module-2-ztac-ns-isolation.md)  
 Module 3 - [Workload Isolation with Microsegmentation](modules/module-3-wkload-isolation.md)  
 Module 4 - [Ingress and Egress access control using NetworkSets](modules/module-4-network-sets.md)  
 Module 5 - [Application Level Observability](modules/module-5-application-observability.md)  

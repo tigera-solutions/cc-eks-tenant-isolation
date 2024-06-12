@@ -1,4 +1,4 @@
-# Module 2 - Zero-Trust Workload Access Control with Namespace Isolation Recommendation
+# Module 2 - Implement Workload Access Control with Namespace Isolation Recommendation
 
 One of the best ways to make your Kubernetes cluster more secure is to use network policy to isolate namespaces. This means that you only allow the communication between namespaces that is absolutely necessary, and you block everything else. This helps to reduce the risk of an attacker moving from one part of your cluster to another if they manage to get in.
 
