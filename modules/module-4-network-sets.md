@@ -27,7 +27,7 @@ To simplify this process, we can use a NetworkSet to create a list of URLs or IP
 
 Let's test it out.
 
-2. Edit the policy to use a `NetworkSet` with DNS domain instead of inline DNS rule.
+1. Edit the policy to use a `NetworkSet` with DNS domain instead of inline DNS rule.
 
    a. Create a NetworkSet that includes the `dog.ceo`, `catfact.ninja` and `api.twilio.com` APIs as allowed egress domains.
 
