@@ -10,11 +10,11 @@ Calico Cloud enables fine-grained, zero-trust workload access controls between y
 
 You will come away from this workshop with an understanding of how others in your industry are securing and observing cloud-native applications in AWS, along with best practices that you can implement in your organization.
 
-### Time Requirements
+### :alarm_clock: Time Requirements
 
 The estimated time to complete this workshop is 60-90 minutes.
 
-### Target Audience
+### :dart: Target Audience
 
 - Cloud Professionals
 - DevSecOps Professional
@@ -22,7 +22,7 @@ The estimated time to complete this workshop is 60-90 minutes.
 - Solutions Architects
 - Anyone interested in Calico Cloud :)
 
-### Learning Objectives
+### :book: Learning Objectives
 
 1. Learn how to create and deploy policies based on FQDNs, Layer 7, Networksets.
 2. Stage, preview and enforce network policies.
@@ -88,5 +88,5 @@ Module 6 - [Clean up](modules/module-6-clean-up.md)
 - [Github](https://github.com/tigera-solutions/)
 - [Discuss](https://discuss.projectcalico.tigera.io/)
 
-> [!NOTE]
+> [!IMPORTANT]
 > The examples and sample code provided in this workshop are intended to be consumed as instructional content. These will help you understand how Calico Cloud can be configured to build a functional solution. These examples are not intended for use in production environments.
