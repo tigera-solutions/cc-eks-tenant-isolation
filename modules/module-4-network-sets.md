@@ -2,58 +2,36 @@
 
 It's also possible to create network policies for controlling access from and to a specific domain name, or a list of domain names and ip addresses. Let's create some policies to verify this control in action.
 
-1. Implement DNS policy to allow the external endpoint access from a specific workload, e.g. `catfacts/db`.
-
-   a. Apply a policy to allow access to `api.twilio.com` endpoint using DNS rule.
-
-   ```yaml
-   kubectl apply -f - <<-EOF
-   apiVersion: projectcalico.org/v3
-   kind: GlobalNetworkPolicy
-   metadata:
-     name: security.external-domain-access
-   spec:
-     tier: security
-     selector: (app == "db" && projectcalico.org/namespace == "catfacts")
-     order: 100
-     types:
-       - Egress
-     egress:
-     - action: Allow
-       source:
-         selector: app == 'db'
-       destination:
-         domains:
-         - '*.twilio.com'
-   EOF
-   ```
-
-   Test the access to the endpoints:
+1. Test the access to different APISs from the endpoint `catfacts/worker`:
 
    ```bash
-   # test egress access to api.twilio.com from db pod
-   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=db -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://api.twilio.com 2>/dev/null | grep -i http'
+   # test egress access to catfact.ninja from db pod
+   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=worker -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://catfact.ninja/fact 2>/dev/null | grep -i http'
    ```
 
    ```bash
-   # test egress access to www.google.com
-   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=db -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://www.google.com 2>/dev/null | grep HTTP'
+   # test egress access to dog.ceo from db pod
+   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=worker -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://dog.ceo/api/breeds/image/random 2>/dev/null | grep -i http'
    ```
-
-   Access to the `api.twilio.com` endpoint should be allowed by the DNS policy and any other external endpoints like `www.google.com` should be denied.
-
-   b. Modify the policy to include `*.google.com` in dns policy and test egress access to ```www.google.com``` again.
 
    ```bash
-   # test egress access to www.google.com again and it should be allowed.
-   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=db -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://www.google.com 2>/dev/null | grep HTTP'
+   # test egress access to api.twilio.com
+   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=worker -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://api.twilio.com 2>/dev/null | grep HTTP'
    ```
+
+   Access to the `api.twilio.com` endpoint should be denied by the DNS policy.
+
+What if we now need access to the Twilio API? We would need to add the domain api.twilio.com to each DNS policy we have. For our workshop, we only have one policy, but in a real-world scenario, we would likely have dozens of workloads accessing different APIs. In that case, we would need to modify each network policy to include the Twilio API.
+
+To simplify this process, we can use a NetworkSet to create a list of URLs or IP addresses and have the network policies refer to it. This way, only the NetworkSet needs to be modified when adding or removing addresses.
+
+Let's test it out.
 
 2. Edit the policy to use a `NetworkSet` with DNS domain instead of inline DNS rule.
 
-   a. Apply a policy to allow access to `api.twilio.com` endpoint using DNS policy.
+   a. Create a NetworkSet that includes the `dog.ceo`, `catfact.ninja` and `api.twilio.com` APIs as allowed egress domains.
 
-   Deploy the Network Set
+   Deploy the NetworkSet
 
    ```yaml
    kubectl apply -f - <<-EOF
@@ -65,21 +43,23 @@ It's also possible to create network policies for controlling access from and to
        type: allowed-api
    spec:
      allowedEgressDomains:
-     - '*.twilio.com'
+     - 'dog.ceo'
+     - 'catfact.ninja'
+     - 'api.twilio.com'
    EOF
    ```
 
-   b. Deploy the DNS policy using the network set
+   b. Deploy the DNS policy using the NetworkSet that we created.
 
    ```yaml
    kubectl apply -f - <<-EOF
    apiVersion: projectcalico.org/v3
    kind: GlobalNetworkPolicy
    metadata:
-     name: security.external-domain-access
+     name: security.external-api-access
    spec:
      tier: security
-     selector: (app == "db" && projectcalico.org/namespace == "catfacts")
+     selector: (app == "worker" && projectcalico.org/namespace == "catfacts")
      order: 100
      types:
        - Egress
@@ -93,20 +73,18 @@ It's also possible to create network policies for controlling access from and to
    c. Test the access to the endpoints.
 
    ```bash
-   # test egress access to api.twilio.com from db pod
-   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=db -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://api.twilio.com 2>/dev/null | grep -i http'
+   # test egress access to catfact.ninja from db pod
+   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=worker -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://catfact.ninja/fact 2>/dev/null | grep -i http'
    ```
 
    ```bash
-   # test egress access to www.google.com
-   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=db -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://www.google.com 2>/dev/null | grep HTTP'
+   # test egress access to dog.ceo from db pod
+   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=worker -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://dog.ceo/api/breeds/image/random 2>/dev/null | grep -i http'
    ```
 
-   d. Modify the `NetworkSet` to include `*.google.com` in dns domain and test egress access to ```www.google.com``` again.
-
    ```bash
-   # test egress access to www.google.com again and it should be allowed.
-   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=db -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://www.google.com 2>/dev/null | grep HTTP'
+   # test egress access to api.twilio.com
+   kubectl -n catfacts exec -t $(kubectl -n catfacts get po -l app=worker -ojsonpath='{.items[0].metadata.name}') -- sh -c 'curl -m3 -skI https://api.twilio.com 2>/dev/null | grep HTTP'
    ```
 
 ## Ingress Policies using NetworkSets
