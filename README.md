@@ -45,6 +45,7 @@ The estimated time to complete this workshop is 60-90 minutes.
 - Ensure the nodegroup variable is populated into the ```workshopvars.env``` file:
 
    ```bash
+   source ~/workshopvars.env
    export NGNAME=$(eksctl get nodegroups --cluster $CLUSTERNAME --region $REGION | grep $CLUSTERNAME | awk -F ' ' '{print $2}') && \
    echo export NGNAME=$NGNAME >> ~/workshopvars.env
    ```
@@ -52,8 +53,7 @@ The estimated time to complete this workshop is 60-90 minutes.
 - Use the following command:
 
   ```bash
-  source ~/workshopvars.env
-  eksctl scale nodegroup $NGNAME \
+    eksctl scale nodegroup $NGNAME \
   --cluster $CLUSTERNAME \
   --region $REGION \
   --nodes 2 \
