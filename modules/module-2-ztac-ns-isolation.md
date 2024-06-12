@@ -64,7 +64,7 @@ We recommend creating a global default deny policy after you complete reviewing 
 
 1. Create a staged global default-deny policy. It will show all the traffic that would be blocked if it were enforced.
 
-   - Go to the `Policies Board`
+   - Go to the `Policies`
    - On the bottom of the tier box `default` click on `Add Policy`
      - In the `Create Policy` page enter the policy name: `default-deny`
      - On the `Applies To` session, click `Add Namespace Selector`
