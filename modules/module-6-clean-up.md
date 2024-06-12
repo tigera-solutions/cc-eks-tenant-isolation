@@ -1,4 +1,4 @@
-# Module 8 - Clean up
+# Module 6 - Clean up
 
 1. Delete the applications stack to clean up any `loadbalancer` services.
 
