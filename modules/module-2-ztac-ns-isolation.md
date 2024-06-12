@@ -9,8 +9,8 @@ During this workshop, we will use the `Cat Facts Application` as an example to w
 1. Clone this repository in your AWS CloudShell.
 
    ```bash
-   git clone https://github.com/tigera-solutions/cc-eks-zero-trust-workshop.git && \
-   cd cc-eks-zero-trust-workshop
+   git clone https://github.com/tigera-solutions/cc-eks-tenant-isolation.git && \
+   cd cc-eks-tenant-isolation
    ```
 
 1. Install the example application stack:
