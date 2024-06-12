@@ -1,6 +1,6 @@
 # Module 4 - Ingress and Egress access control using NetworkSets
 
-It's also possible to create network policies for controlling access from and to a specific domain name, or a list of domain names and ip addresses. Let's create some policies to verify this control in action.
+It's also possible to create network sets for controlling access from and to a  list of domain names and ip addresses. Let's verify this control in action.
 
 1. Test the access to different APISs from the endpoint `catfacts/worker`:
 
