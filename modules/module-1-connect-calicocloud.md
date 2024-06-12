@@ -105,5 +105,5 @@ When you change the cluster, the whole Calico Cloud context will change immediat
 
 ---
 
-[:arrow_right: Module 2 - Zero-Trust Workload Access Control with Namespace Isolation Recommendation](module-2-ztac-ns-isolation.md)  
+[:arrow_right: Module 2 - Implement Workload Access Control with Namespace Isolation Recommendation](module-2-ztac-ns-isolation.md)  
 [:leftwards_arrow_with_hook: Back to Main](../README.md)  

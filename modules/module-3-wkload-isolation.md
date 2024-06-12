@@ -101,5 +101,5 @@ For more information about tiers, please refer to the Calico Cloud documentation
 
 [:arrow_right: Module 4 - Ingress and Egress access control using NetworkSets](module-4-network-sets.md)  
 
-[:arrow_left: Module 2 - Zero-Trust Workload Access Control with Namespace Isolation Recommendation](module-2-ztac-ns-isolation.md)  
+[:arrow_left: Module 2 - Implement Workload Access Control with Namespace Isolation Recommendation](module-2-ztac-ns-isolation.md)  
 [:leftwards_arrow_with_hook: Back to Main](../README.md)  
