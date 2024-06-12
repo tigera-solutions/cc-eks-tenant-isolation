@@ -32,7 +32,7 @@ Calico Security Policies provide a richer set of policy capabilities than the na
 1. Based on the application design, the `db` lists on port `3306` and receive connections from the `worker` and the `facts` microservices.
    Let's use the Calico Cloud UI to create a policy to microsegment this traffic.
 
-   - Go to the `Policies Board`
+   - Go to the `Policies`
    - On the bottom of the tier box `platform` click on `Add Policy`
      - In the `Create Policy` page enter the policy name: `db`
      - Change the `Scope` from `Global` to `Namespace` and select the namespace `catfacts`
