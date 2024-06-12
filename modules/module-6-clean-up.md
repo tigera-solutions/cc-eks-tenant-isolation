@@ -16,7 +16,7 @@
 3. Delete this repo
 
    ```bash
-   cd .. && rm -Rf cc-eks-zero-trust-workshop
+   cd .. && rm -Rf cc-eks-tenant-isolation
    ```
 
 4. Delete environment variables backup file.
