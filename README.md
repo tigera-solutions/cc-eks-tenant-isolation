@@ -1,4 +1,4 @@
-# AWS Dev Days: Enforcing workload isolation in multi-tenant EKS cluster
+# Enforcing workload isolation in multi-tenant EKS cluster
 
 ## Welcome
 
