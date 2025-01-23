@@ -3,11 +3,11 @@ kind: Tier
 metadata:
   name: security
 spec:
-  order: 200
+  order: 1200
 ---
 apiVersion: projectcalico.org/v3
 kind: Tier
 metadata:
   name: platform
 spec:
-  order: 300
+  order: 1300

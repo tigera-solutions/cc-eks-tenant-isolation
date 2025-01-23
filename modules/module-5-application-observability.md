@@ -52,27 +52,21 @@ In the bottom pane you will see L7 logs in the HTTP tab.
 
 ![http_logs](https://user-images.githubusercontent.com/104035488/216352791-bdbb8376-3b24-4590-81f4-a6b411c1a1cd.gif)
 
-## Kibana dashboards and logs
+## Dashboards
 
-Kibana is the frontend for Calico Cloud Elasticsearch, which is the logging infrastructure that centrally stores logs from all managed clusters. Kibana provides an interface to explore Elasticsearch logs and gain insights into workload communication traffic volume, performance, and other key aspects of cluster operations. Log data is also summarized in custom dashboards.
+Calico Cloud provides a set of dashboards to help you understand the activity in your cluster. Each dashboard is made up of graphs, charts, and diagrams that visually represent the data in your logs.
 
-### Start Kibana and access dashboards
-
-In Manager UI, from the left navbar select, Kibana. A new browser tab opens into Kibana.
-
-In Kibana, click the hamburger icon in the top left corner, and select Analytics, Dashboard.
-
-![kibana-dashboard](https://user-images.githubusercontent.com/104035488/216352874-83d3dd93-0596-4791-b974-e18c0cd364c7.png)
+To view your dashboards, sign in to Calico Cloud Manager and click the Dashboards icon.
 
 ### L7 HTTP dashboard
 
-The L7 HTTP dashboard provides application performance metrics for inscope Kubernetes services. The data can assist service owners and platform personnel in assessing the health of cluster workloads without the need for a full service mesh. L7 logs are not enabled by default, and must be configured.
+The L7 dashboard provides application performance metrics for inscope Kubernetes services. The data can assist service owners and platform personnel in assessing the health of cluster workloads without the need for a full service mesh. L7 logs are not enabled by default, and must be configured.
 
 ![l7-dashboard](https://user-images.githubusercontent.com/104035488/216352987-23be3658-2a66-437f-b791-31340971c287.png)
 
 ### DNS dashboard
 
-The DNS dashboard summarizes DNS data and logs into metrics, providing high-level information on the types of DNS lookups made, responses, and overall DNS performance. By default, DNS activity logs are captured only for requests/responses from Kubernetes built-in DNS services (CoreDNS). DNS activity to an external DNS server can be captured by configuring the parameter, dnsTrustedServers in Felix. DNS activity to Node local server is not supported.
+The DNS Dashboard summarizes DNS data and logs into metrics, providing high-level information on the types of DNS lookups made, responses, and overall DNS performance.
 
 ![dns-dashboard](https://user-images.githubusercontent.com/104035488/216353120-e78261a0-cd5b-4b89-a171-4225608422c3.png)
 
