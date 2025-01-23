@@ -62,13 +62,13 @@ To view your dashboards, sign in to Calico Cloud Manager and click the Dashboard
 
 The L7 dashboard provides application performance metrics for inscope Kubernetes services. The data can assist service owners and platform personnel in assessing the health of cluster workloads without the need for a full service mesh. L7 logs are not enabled by default, and must be configured.
 
-![l7-dashboard](https://user-images.githubusercontent.com/104035488/216352987-23be3658-2a66-437f-b791-31340971c287.png)
+![dashboard-l7-8ceff30f2727a30744fdf0a9eb6f7c62](https://github.com/user-attachments/assets/16fcdc91-bc87-4910-aa7b-22fab977a5b6)
 
 ### DNS dashboard
 
 The DNS Dashboard summarizes DNS data and logs into metrics, providing high-level information on the types of DNS lookups made, responses, and overall DNS performance.
 
-![dns-dashboard](https://user-images.githubusercontent.com/104035488/216353120-e78261a0-cd5b-4b89-a171-4225608422c3.png)
+![dashboard-dns-logs-079773edfb807ab586030ca8b4b8a890](https://github.com/user-attachments/assets/c8cafe4b-05ce-41d4-b329-0b04e3738da4)
 
 ---
 
