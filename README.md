@@ -53,7 +53,7 @@ The estimated time to complete this workshop is 60-90 minutes.
 - Use the following command:
 
   ```bash
-    eksctl scale nodegroup $NGNAME \
+  eksctl scale nodegroup $NGNAME \
   --cluster $CLUSTERNAME \
   --region $REGION \
   --nodes 2 \
