@@ -1,0 +1,79 @@
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: platform.facts
+  namespace: catfacts
+spec:
+  tier: platform
+  order: 140
+  selector: app == 'facts'
+  types:
+  - Ingress
+  - Egress
+  ingress:
+  - action: Allow
+    protocol: TCP
+    source: {}
+    destination:
+      ports:
+      - 80
+  egress:
+  - action: Allow
+    protocol: TCP
+    destination:
+      selector: app == 'db'
+      ports:
+      - 3306
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: platform.worker
+  namespace: catfacts
+spec:
+  tier: platform
+  order: 120
+  selector: app == 'worker'
+  types:
+  - Egress
+  egress:
+  - action: Allow
+    protocol: TCP
+    destination:
+      selector: app == 'facts'
+      ports:
+      - 80
+  - action: Allow
+    protocol: TCP
+    destination:
+      domains:
+      - dog.ceo
+      - catfact.ninja
+      ports:
+      - 443
+  - action: Allow
+    protocol: TCP
+    destination:
+      selector: app == 'db'
+      ports:
+      - 3306
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: platform.db
+  namespace: catfacts
+spec:
+  tier: platform
+  order: 100
+  selector: app == 'db'
+  types:
+  - Ingress
+  ingress:
+  - action: Allow
+    protocol: TCP
+    source:
+      selector: app == "worker" || app == "facts"
+    destination:
+      ports:
+        - '3306'
